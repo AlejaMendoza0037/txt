@@ -1,0 +1,54 @@
+DDL
+
+CREATE DATABASE EmpresaYHWH;
+USE EmpresaYHWH;
+
+-- Creación de tablas
+CREATE TABLE Empleado (
+    empleado_id INT PRIMARY KEY,
+    nombre VARCHAR(50),
+    cedula VARCHAR(20),
+    centro_costos VARCHAR(50)
+);
+
+CREATE TABLE SolicitudCompra (
+    solicitud_id INT PRIMARY KEY,
+    fecha DATE,
+    responsable_id INT,
+    centro_costos VARCHAR(50),
+    rubro_presupuestal VARCHAR(50),
+    FOREIGN KEY (responsable_id) REFERENCES Empleado(empleado_id)
+);
+
+CREATE TABLE ItemSolicitud (
+    item_id INT PRIMARY KEY,
+    solicitud_id INT,
+    nombre_bien VARCHAR(50),
+    cantidad INT,
+    unidad_medida VARCHAR(20),
+    valor_unitario DECIMAL(10, 2),
+    valor_total DECIMAL(10, 2),
+    FOREIGN KEY (solicitud_id) REFERENCES SolicitudCompra(solicitud_id)
+);
+
+
+DML
+
+
+
+INSERT INTO Empleado (empleado_id, nombre, cedula, centro_costos) VALUES
+(1, 'Juan Perez', '1234567890', 'Costos Generales'),
+(2, 'Maria Lopez', '2345678901', 'Proyectos'),
+(3, 'Luis Martinez', '3456789012', 'Recursos Humanos'),
+(4, 'Ana Gonzalez', '4567890123', 'Logística'),
+(5, 'Carlos Rodriguez', '5678901234', 'Financiero');
+
+
+INSERT INTO SolicitudCompra (solicitud_id, fecha, responsable_id, centro_costos, rubro_presupuestal) VALUES
+(1, '2024-10-01', 1, 'Costos Generales', 'Mantenimiento'),
+(2, '2024-10-02', 2, 'Proyectos', 'Infraestructura'),
+(3, '2024-10-03', 3, 'Recursos Humanos', 'Capacitación'),
+(4, '2024-10-04', 4, 'Logística', 'Suministros'),
+(5, '2024-10-05', 5, 'Financiero', 'Tecnología');
+
+
